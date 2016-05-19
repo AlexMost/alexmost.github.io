@@ -46,6 +46,11 @@
     Posted on May 18, 2016
     
 </div>
+<div class="info">
+    
+        Tags: <a href="../tags/javascript.html">javascript</a>, <a href="../tags/frontend.html">frontend</a>, <a href="../tags/webpack.html">webpack</a>, <a href="../tags/make.html">make</a>
+    
+</div>
 
 <h2 id="the-problem">The problem</h2>
 <p>Nowadays our projects are obtaining more and more build dependencies. In this article, I will be speaking from the frontend development perspective. But I think the same problem applies to other fields of development.</p>
@@ -60,7 +65,7 @@
 <p>Here is the example of basic project build setup, assume you have decided to build your assets with webpack. So the first step is to create some new directory, cd to it and execute:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">npm</span> init</code></pre></div>
 <p>after that install webpack locally:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">npm</span> install --save-dev webapck</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">npm</span> install --save-dev webpack</code></pre></div>
 <p>and here is a simple make file that will add your local <em>node_modules/.bin</em> to <em>PATH</em> and can launch all packages that are installed locally. This file contains one simple rule - <code>build</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">SHELL</span> := /bin/bash
 <span class="kw">export</span> <span class="ot">PATH</span> :<span class="ot">=</span> <span class="ot">$(</span><span class="kw">PWD</span><span class="ot">)</span>/node_modules/.bin:<span class="ot">$(</span><span class="kw">PATH</span><span class="ot">)</span>

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Alexander Mostovenko blog - Browser rendering optimisation (Udacity course)</title>
+        <title>Alexander Mostovenko blog - Posts tagged "courses"</title>
         <link rel="stylesheet" type="text/css" href="../css/fonts.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
@@ -40,56 +40,15 @@
         </div>
 
         <div id="content">
-            <h1>Browser rendering optimisation (Udacity course)</h1>
+            <h1>Posts tagged "courses"</h1>
 
-            <div>
-    Posted on May 15, 2016
+            <ul>
     
-</div>
-<div class="info">
+        <li>
+            <a href="../posts/2016-05-15-browser-optimisation-course.html">Browser rendering optimisation (Udacity course)</a> - May 15, 2016
+        </li>
     
-        Tags: <a href="../tags/javascript.html">javascript</a>, <a href="../tags/frontend.html">frontend</a>, <a href="../tags/courses.html">courses</a>
-    
-</div>
-
-<p><img src="../images/render-optimisations/udacity-logo.png" /></p>
-<h2 id="browser-rendering-optimisation">Browser rendering optimisation</h2>
-<p>course - <a href="https://www.udacity.com/course/browser-rendering-optimization--ud860">link</a></p>
-<p>So here is, actually, the first post in this blog. And I decided to make it quite small, just a few impressions about the course from Google, that I have completed recently.</p>
-<p>The course itself is quite small, but is full of interesting live examples and gives you a nice overview of how browser rendering works. This course gives you a good insight on how you can use Chrome dev tools to find bottlenecks in your frontend apps. And gives you a lot of info on how to make your app running at 60 fps. Shortly speaking, it will be useful for everyone who writes any frontend CSS/javascript code.</p>
-<h2 id="some-course-insights">Some course insights</h2>
-<p>Here are some main thoughts that I have after finishing the last course exercise:</p>
-<ul>
-<li>Use <a href="http://www.chrisdanford.com/blog/2011/07/24/understanding-hardware-compositing-css-transforms/">composite layers</a> for creating smooth and almost zero cost animations.</li>
-<li>Move CPU bound tasks to <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers">Web workers</a>. Seriously, why not to use them?</li>
-<li>There is no reason to use setInterval during animations, except you, are supporting old(as dirt) browsers. Use <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a> instead.</li>
-<li>Avoid <a href="https://developers.google.com/web/tools/chrome-devtools/profile/rendering-tools/forced-synchronous-layouts?hl=en">forced synchronous layout</a> calculation.</li>
-<li>Performance matters.</li>
 </ul>
-<div id="footer">
-</div>
-<div id="disqus_thread"></div>
-<script>
-    /**
-     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-     */
-    /*
-     var disqus_config = function () {
-     this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
-     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-     };
-     */
-    (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-
-        s.src = '//mostovenkocom.disqus.com/embed.js';
-
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
         </div>
         <div id="footer">
