@@ -54,7 +54,7 @@
 
 <p>There are a lot of approaches for writing async logic in javascript nowadays. This article does not aim to convince you that rxjs is the only right way, it will just show one of the features that it gives you almost for free. This feature is the possibility to mock time in your tests.</p>
 <h2 id="mock-time-something-like-having-a-time-travel-machine">Mock time? Something like having a time travel machine?</h2>
-<p>Not actually, there is no special magic and this feature is available due to Schedulers (more about schedulers here). Shortly speaking, it is an abstraction on top coordinating and executing time dependent operations such as delay, throttle, debounce, timeout e.t.c</p>
+<p>Not actually, there is no special magic and this feature is available due to Schedulers (more about schedulers here). Shortly speaking, it is an abstraction on top of coordinating and executing time dependent operations such as delay, throttle, debounce, timeout e.t.c</p>
 <h2 id="little-example">Little example</h2>
 <p>Let’s assume we have a stream of messages, and for some reason, we need to add delay logic.</p>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">getDelayedMessages</span>(stream<span class="op">,</span> scheduler) <span class="op">{</span>
