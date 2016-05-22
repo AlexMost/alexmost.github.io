@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Alexander Mostovenko blog - Unit testing for async logic with Rxjs</title>
+        <link rel="stylesheet" type="text/css" href="../css/fonts.css" />
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <link rel="apple-touch-icon" sizes="57x57" href="../images/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../images/favicon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../images/favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../images/favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../images/favicon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../images/favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../images/favicon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../images/favicon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <link rel="manifest" href="../images/favicon/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../">Yet another developers blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Unit testing for async logic with Rxjs</h1>
+
+            <div class="posted">
+    Posted on May 21, 2016
+    
+</div>
+<div class="info">
+    
+        Tags: <a href="../tags/javascript.html">javascript</a>, <a href="../tags/rxjs.html">rxjs</a>, <a href="../tags/frp.html">frp</a>, <a href="../tags/functional%20programming.html">functional programming</a>
+    
+</div>
+
+<p>There are a lot of approaches for writing async logic in javascript nowadays. This article does not aim to convince you that rxjs is the only right way, it will just show one of the features that it gives you almost for free. This feature is the possibility to mock time in your tests.</p>
+<h2 id="mock-time-something-like-having-a-time-travel-machine">Mock time? Something like having a time travel machine?</h2>
+<p>Not actually, there is no special magic and this feature is available due to Schedulers (more about schedulers here). Shortly speaking, it is an abstraction on top coordinating and executing time dependent operations such as delay, throttle, debounce, timeout e.t.c</p>
+<h2 id="little-example">Little example</h2>
+<p>Let’s assume we have a stream of messages, and for some reason, we need to add delay logic.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">getDelayedMessages</span>(stream<span class="op">,</span> scheduler) <span class="op">{</span>
+    <span class="cf">return</span> <span class="va">stream</span>.<span class="at">delay</span>(<span class="dv">100</span><span class="op">,</span> scheduler)
+<span class="op">}</span></code></pre></div>
+<p>Rxjs allows you to test that delay logic with a simple unit test. And the pretty part is that you don’t need actually to wait for 100ms in test, you can just mock that thing.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">const</span> chai <span class="op">=</span> <span class="at">require</span>(<span class="st">'chai'</span>)<span class="op">;</span>
+<span class="kw">const</span> rxAssert <span class="op">=</span> <span class="at">require</span>(<span class="st">'chai-rx-assert'</span>)<span class="op">;</span>
+<span class="va">chai</span>.<span class="at">use</span>(rxAssert)<span class="op">;</span>
+<span class="kw">const</span> expect <span class="op">=</span> <span class="va">chai</span>.<span class="at">expect</span><span class="op">;</span>
+<span class="kw">const</span> <span class="op">{</span>TestScheduler<span class="op">,</span> <span class="dt">ReactiveTest</span><span class="op">:</span> <span class="op">{</span>onNext<span class="op">,</span> onCompleted<span class="op">}}</span> <span class="op">=</span> <span class="at">require</span>(<span class="st">'rx'</span>)<span class="op">;</span>
+
+
+<span class="at">describe</span>(<span class="st">'Test delay'</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="at">it</span>(<span class="st">'test getDelayedMessages'</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="kw">const</span> scheduler <span class="op">=</span> <span class="kw">new</span> <span class="at">TestScheduler</span>()<span class="op">;</span>
+
+        <span class="co">// Create messages for input observable sequence</span>
+        <span class="co">// we can define time and value of onNext and</span>
+        <span class="co">// time for onCompleted</span>
+        <span class="kw">const</span> xs <span class="op">=</span> <span class="va">scheduler</span>.<span class="at">createHotObservable</span>(
+            <span class="at">onNext</span>(<span class="dv">250</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">,</span> <span class="co">// at time 250 we had message with value 2</span>
+            <span class="at">onNext</span>(<span class="dv">350</span><span class="op">,</span> <span class="dv">3</span>)<span class="op">,</span>
+            <span class="at">onCompleted</span>(<span class="dv">550</span>)
+        )<span class="op">;</span>
+    
+        <span class="co">// passing input messages</span>
+        <span class="kw">const</span> results <span class="op">=</span> <span class="va">scheduler</span>.<span class="at">startScheduler</span>(() <span class="op">=&gt;</span> <span class="op">{</span>
+            <span class="cf">return</span> <span class="at">getDelayedMessages</span>(xs<span class="op">,</span> scheduler)<span class="op">;</span>
+        <span class="op">}</span>)<span class="op">;</span>
+    
+        <span class="kw">const</span> expected <span class="op">=</span> [
+            <span class="at">onNext</span>(<span class="dv">350</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">,</span> <span class="co">// at time 350 we are expecting value 2</span>
+            <span class="at">onNext</span>(<span class="dv">450</span><span class="op">,</span> <span class="dv">3</span>)<span class="op">,</span>
+            <span class="at">onCompleted</span>(<span class="dv">650</span>)
+        ]
+        
+        <span class="co">// asserting result.messages</span>
+        <span class="at">expect</span>(<span class="va">results</span>.<span class="at">messages</span>).<span class="va">to</span>.<span class="at">rxEqual</span>(expected)
+    <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<blockquote>
+<p>Useful helper for asserting observables - <a href="https://github.com/AlexMost/chai-rx-assert">chai-rx-assert</a></p>
+</blockquote>
+<p>If you will follow the comments above you will see how we are setting up incoming messages times and values and comparing them with output results. So, all our async logic is now pure and can be covered with unit tests. It acts like a state machine, so we can specify different sequences of inputs and compare with outputs in tests. Our <em>getDelayedMessages</em> function from example can be a function that returns our application state stream, and we can check how it changes depending on input messages, their order, and time when they occur.</p>
+<p>Modern UI’s are tend to be expressed as a changing state container that is binded to view (see <a href="http://cycle.js.org/">Cycle.js</a>, <a href="https://github.com/reactjs/redux">Redux</a>, <a href="https://github.com/evancz/elm-architecture-tutorial">Elm-architecture</a>). All our application can be expressed as a stream of states. That’s why the possibility to have such tests is just awesome and seems like will have a great value for building reliable and robust asynchronous applications in future.</p>
+<div id="footer">
+</div>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+     var disqus_config = function () {
+     this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+     };
+     */
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//mostovenkocom.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+        </div>
+        <div id="footer">
+        </div>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-573a3526f163b54b"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-77801339-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+    </body>
+</html>
