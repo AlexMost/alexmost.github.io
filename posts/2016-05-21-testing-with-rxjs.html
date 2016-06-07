@@ -2,11 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alexander Mostovenko blog - Unit testing for async logic with Rxjs</title>
-        <link rel="stylesheet" type="text/css" href="../css/fonts.css" />
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
-        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+        <link rel="stylesheet" type="text/css" href="../css/default.css">
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css">
         <link rel="apple-touch-icon" sizes="57x57" href="../images/favicon/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="../images/favicon/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="../images/favicon/apple-icon-72x72.png">
@@ -20,12 +20,12 @@
         <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
-        <link rel="shortcut icon" href="../favicon.ico" />
+        <link rel="shortcut icon" href="../favicon.ico">
         <link rel="manifest" href="../images/favicon/manifest.json">
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <div id="header">
@@ -57,20 +57,20 @@
 <h2 id="mock-time-something-like-having-a-time-travel-machine">Mock time? Something like having a time travel machine?</h2>
 <p>Not actually, there is no special magic and this feature is available due to Schedulers (more about schedulers <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/schedulers.md">here</a>). Shortly speaking, it is an abstraction on top of coordinating and executing time dependent operations such as delay, throttle, debounce, timeout e.t.c</p>
 <h2 id="little-example">Little example</h2>
-<p>Let’s assume we have a stream of messages, and for some reason, we need to add delay logic.</p>
+<p>Let&#x2019;s assume we have a stream of messages, and for some reason, we need to add delay logic.</p>
 <div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">getDelayedMessages</span>(stream<span class="op">,</span> scheduler) <span class="op">{</span>
     <span class="cf">return</span> <span class="va">stream</span>.<span class="at">delay</span>(<span class="dv">100</span><span class="op">,</span> scheduler)
 <span class="op">}</span></code></pre></div>
-<p>Rxjs allows you to test that delay logic with a simple unit test. And the pretty part is that you don’t need actually to wait for 100ms in test, you can just mock that thing.</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">const</span> chai <span class="op">=</span> <span class="at">require</span>(<span class="st">'chai'</span>)<span class="op">;</span>
-<span class="kw">const</span> rxAssert <span class="op">=</span> <span class="at">require</span>(<span class="st">'chai-rx-assert'</span>)<span class="op">;</span>
+<p>Rxjs allows you to test that delay logic with a simple unit test. And the pretty part is that you don&#x2019;t need actually to wait for 100ms in test, you can just mock that thing.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">const</span> chai <span class="op">=</span> <span class="at">require</span>(<span class="st">&apos;chai&apos;</span>)<span class="op">;</span>
+<span class="kw">const</span> rxAssert <span class="op">=</span> <span class="at">require</span>(<span class="st">&apos;chai-rx-assert&apos;</span>)<span class="op">;</span>
 <span class="va">chai</span>.<span class="at">use</span>(rxAssert)<span class="op">;</span>
 <span class="kw">const</span> expect <span class="op">=</span> <span class="va">chai</span>.<span class="at">expect</span><span class="op">;</span>
-<span class="kw">const</span> <span class="op">{</span>TestScheduler<span class="op">,</span> <span class="dt">ReactiveTest</span><span class="op">:</span> <span class="op">{</span>onNext<span class="op">,</span> onCompleted<span class="op">}}</span> <span class="op">=</span> <span class="at">require</span>(<span class="st">'rx'</span>)<span class="op">;</span>
+<span class="kw">const</span> <span class="op">{</span>TestScheduler<span class="op">,</span> <span class="dt">ReactiveTest</span><span class="op">:</span> <span class="op">{</span>onNext<span class="op">,</span> onCompleted<span class="op">}}</span> <span class="op">=</span> <span class="at">require</span>(<span class="st">&apos;rx&apos;</span>)<span class="op">;</span>
 
 
-<span class="at">describe</span>(<span class="st">'Test delay'</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span>
-    <span class="at">it</span>(<span class="st">'test getDelayedMessages'</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span>
+<span class="at">describe</span>(<span class="st">&apos;Test delay&apos;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="at">it</span>(<span class="st">&apos;test getDelayedMessages&apos;</span><span class="op">,</span> () <span class="op">=&gt;</span> <span class="op">{</span>
         <span class="kw">const</span> scheduler <span class="op">=</span> <span class="kw">new</span> <span class="at">TestScheduler</span>()<span class="op">;</span>
 
         <span class="co">// Create messages for input observable sequence</span>
@@ -101,7 +101,7 @@
 <p>Useful helper for asserting observables - <a href="https://github.com/AlexMost/chai-rx-assert">chai-rx-assert</a></p>
 </blockquote>
 <p>If you will follow the comments above you will see how we are setting up incoming messages times and values and comparing them with output results. So, all our async logic is now pure and can be covered with unit tests. It acts like a state machine, so we can specify different sequences of inputs and compare with outputs in tests. Our <em>getDelayedMessages</em> function from example can be a function that returns our application state stream, and we can check how it changes depending on input messages, their order, and time when they occur.</p>
-<p>Modern UI’s are tend to be expressed as a changing state container that is binded to view (see <a href="http://cycle.js.org/">Cycle.js</a>, <a href="https://github.com/reactjs/redux">Redux</a>, <a href="https://github.com/evancz/elm-architecture-tutorial">Elm-architecture</a>). All our application can be expressed as a stream of states. That’s why the possibility to have such tests is just awesome and seems like will have a great value for building reliable and robust asynchronous applications in future.</p>
+<p>Modern UI&#x2019;s are tend to be expressed as a changing state container that is binded to view (see <a href="http://cycle.js.org/">Cycle.js</a>, <a href="https://github.com/reactjs/redux">Redux</a>, <a href="https://github.com/evancz/elm-architecture-tutorial">Elm-architecture</a>). All our application can be expressed as a stream of states. That&#x2019;s why the possibility to have such tests is just awesome and seems like will have a great value for building reliable and robust asynchronous applications in future.</p>
 <div id="footer">
 </div>
 <div id="disqus_thread"></div>
@@ -130,6 +130,7 @@
         </div>
         <div id="footer">
         </div>
+        <script type="text/javascript" src="../node_modules/lazysizes/lazysizes.min.js"></script>
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-573a3526f163b54b"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
