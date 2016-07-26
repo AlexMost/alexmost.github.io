@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Alexander Mostovenko blog - Posts tagged &quot;book review&quot;</title>
+        <title>Alexander Mostovenko blog - &apos;Using Webpagetets&apos; book review</title>
         
         
         
@@ -20,7 +20,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
-        <link rel="canonical" href="http://www.mostovenko.com/tags/book%20review.html">
+        <link rel="canonical" href="http://www.mostovenko.com/posts/2016-07-25-webpage-test-book-review.html">
         <link rel="shortcut icon" href="../favicon.ico">
         <link rel="manifest" href="../images/favicon/manifest.json">
         <meta name="msapplication-TileColor" content="#ffffff">
@@ -42,19 +42,60 @@
         </div>
 
         <div id="content">
-            <h1>Posts tagged &quot;book review&quot;</h1>
+            <h1>&apos;Using Webpagetets&apos; book review</h1>
 
-            <ul>
+            <div class="posted">
+    Posted on July 26, 2016
     
-        <li>
-            <a href="../posts/2016-07-25-webpage-test-book-review.html">&apos;Using Webpagetets&apos; book review</a> - July 26, 2016
-        </li>
+</div>
+<div class="info">
     
-        <li>
-            <a href="../posts/2016-06-24-book-review-frontend-architecture-design.html">Book review &quot;Frontend architecture design&quot;</a> - June 24, 2016
-        </li>
+        Tags: <a href="../tags/books.html">books</a>, <a href="../tags/frontend.html">frontend</a>, <a href="../tags/book%20review.html">book review</a>
     
+</div>
+
+<h1 id="webpagetest-book-review">Webpagetest book review</h1>
+<h2 id="book-link---here">book link - <a href="http://shop.oreilly.com/product/0636920033592.do">here</a></h2>
+<p>Recently I have finished this book and have some words for feedback. First of all <a href="http://www.webpagetest.org/">Webpagetest</a> is quite a powerful tool for monitoring website performance and for getting some insights about performance bottlenecks and the ways in which they can be removed. This information can be inferred from projects page, but this tool is more powerful than I even thought and thanks to this book I have some insights about how I can use it on a real project more efficiently. So I definitely suggest you to read this book if you care about measuring and testing website performance.</p>
+<h2 id="what-you-can-do-with-webpagetest">What you can do with Webpagetest</h2>
+<p>The full list of features can be found in their spec or in the book. But here are some features that I found the most interesting for me:</p>
+<ul>
+<li>Measuring <a href="https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index">speed index</a>.</li>
+<li>You can test webpage with or without cached resources (compare the results).</li>
+<li>You can check SPOF. (points of failure, check how your page behaves when some of the resources are not available).</li>
+<li>Configure to launch test on a real mobile devices.</li>
+<li>You can choose different locations all over the world for running your tests.</li>
+<li>You can use their API for launching some tests programmatically setting up CI.</li>
+<li>You can compare test of you webpage with competitors to get more insights about which parts should be optimized (reports can be represented as a timeline screenshots or video).</li>
+<li>You can make your own custom setup of webpagetest instance on AWS or locally.</li>
+<li>You can setup a performance budget and add appropriate tasks to your CI.</li>
 </ul>
+<h2 id="synthetic-or-rum-tests">Synthetic or RUM tests?</h2>
+<p>Actually, there are two approaches on how you can measure your website performance. One is RUM (real user monitoring). RUM can include such metrics as page load time, document ready time e.t.c. A good example for RUM is webpage statistics from google analytics. On the other side, a synthetic test is the test where you are actually model real user interaction and observing how the page renders (can include video recording, slides). Synthetic tests are useful when you want to control your webpage performance across different environments and browsers. Webpagetest gives you a lot of options for setting up the most relevant tests for your case. And to be able to determine what settings are relevant for you can use data from RUM. So the answer for &#x201C;synthetic or RUM&#x201D; is you should use both. In case of a webpagetest tool it is a tool for running synthetic tests.</p>
+<div id="footer">
+</div>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+     var disqus_config = function () {
+     this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+     };
+     */
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//mostovenkocom.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
         </div>
         <div id="footer">
