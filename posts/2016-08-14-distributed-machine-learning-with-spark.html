@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Alexander Mostovenko blog - Introduction to Apache Spark (Edx course)</title>
+        <title>Alexander Mostovenko blog - Distributed Machine Learning with Apache Spark (Edx course review)</title>
         
         
         
@@ -20,7 +20,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
-        <link rel="canonical" href="http://www.mostovenko.com/posts/2016-07-13-apache-spark-intro.html">
+        <link rel="canonical" href="http://www.mostovenko.com/posts/2016-08-14-distributed-machine-learning-with-spark.html">
         <link rel="shortcut icon" href="../favicon.ico">
         <link rel="manifest" href="../images/favicon/manifest.json">
         <meta name="msapplication-TileColor" content="#ffffff">
@@ -42,10 +42,10 @@
         </div>
 
         <div id="content">
-            <h1>Introduction to Apache Spark (Edx course)</h1>
+            <h1>Distributed Machine Learning with Apache Spark (Edx course review)</h1>
 
             <div class="posted">
-    Posted on July 13, 2016
+    Posted on August 14, 2016
     
 </div>
 <div class="info">
@@ -54,20 +54,19 @@
     
 </div>
 
-<h1 id="introduction-to-apache-spark">Introduction to Apache Spark</h1>
-<h2 id="edx-course---link">Edx course - <a href="https://www.edx.org/course/introduction-apache-spark-uc-berkeleyx-cs105x">link</a></h2>
-<p>Apache Spark is now a hot topic in the world of big data and data analysis. It is commonly used for processing a huge amount of data and positioned as a faster solution than <a href="http://hadoop.apache.org/">hadoop</a>. So I decided to learn some more about this technology and about what makes it so special.</p>
-<p>Here are just some numbers that can impress and give you some insight:</p>
-<ul>
-<li>Apache Spark is able to sort <em>100 TB</em> array in <em>23 minutes</em> !!!</li>
-<li>It is the first technology that solved the problem of <em>1 PT</em> array sorting !!!</li>
-</ul>
-<p>During the course, you will be working with <a href="https://databricks.com/">DataBricks</a> service that allows you to create and launch spark jobs in a cluster. And also provides really simple and user-friendly interface for managing clusters. In this course, python is used for working with data frames and building queries inside python notebooks (but you can also use Scala and Java for that task in a real world).</p>
-<p>This course will give you really basic understanding of how to work with spark data frames, build some aggregation queries and visualize the results. You will work with a real log from NASA website and retrieve some statistical info.</p>
+<h1 id="distributed-machine-learning-with-apache-spark">Distributed Machine Learning with Apache Spark</h1>
+<h2 id="edx-course---link">Edx course - <a href="https://www.edx.org/course/distributed-machine-learning-apache-uc-berkeleyx-cs120x">link</a></h2>
+<p>So, I decided to continue my apache spark exploration and passed the second course on edx which is related to exploring this technology. Here is a brief summary of things that I found interesting in this course.</p>
+<h2 id="you-will-become-more-familiar-with-machine-learning-basics-and-will-create-and-train-models-for-making-predictions-linear-regression-logistic-regression">You will become more familiar with machine learning basics and will create and train models for making predictions (linear regression, logistic regression)</h2>
+<p>This course will explain in detail the most basic concepts behind the linear and logistic regression models. Step by step you will create and train models for making predictions. I must admit that course materials are prepared well and if you have no prior experience in machine learning you will be able to learn those basics from scratch and apply all learned material for the real case scenarios. (click through rate predictions, predictions of the song year by some features e.t.c). During the course, you will be working with datasets and tasks from <a href="https://www.kaggle.com/competitions">kaggle</a>. This is the most popular resource where data scientists all over the world are competing in solving the machine learning problems.</p>
+<h2 id="you-will-become-more-familiar-with-spark-internals.">You will become more familiar with Spark internals.</h2>
+<p>In the previous <a href="../posts/2016-07-13-apache-spark-intro.html">course (Introduction to Apache Spark)</a> all tasks were based on work with DataFrame object. And in this one, you will be working with a little bit lower layer of abstraction - RDD (resilient distributed dataset). This experience brings some deeper understanding about how Spark works.</p>
+<h2 id="you-will-recover-some-math-skills">You will recover some math skills</h2>
+<p>There are some math related tasks during this course. Basic matrix and vectors operations (multiplication, dot product e.t.c), derivatives their real case application (finding extremums for minimizing deviations). So if you have heard about those things in university but haven&#x2019;t seen where that knowledge can be applied - this course is a nice place to see how all those things work in a real world helping to solve real problems.</p>
 <h2 id="a-few-words-about-functional-programming">A few words about functional programming</h2>
-<p>Still, there are a lot of people who are really sceptical about functional programming and it&#x2019;s value. What I can say is that Apache Spark project is a really bright demo of the use case of functional programming and real proof that it works. Functional programming patterns are good for building reliable distributed systems and multicore processing. Also, it shows the power of data streaming.</p>
-<p>Shortly speaking, if you are interested in the big data and wanted to get familiar with Spark this course is a good place to get started. But if you are already familiar with Spark API I think you can go to the nex course in that series on Edx.</p>
-<p>Will be glad if you will suggest some more courses and materials about Spark in comments (:</p>
+<p>All spark API is based on functional code like maps, filters, reducers, zippers e.t.c. These operations are scaled on a bunch of workers and executed in parallel. But all that is happening behind the scenes (without ugly low-level locks, mutexes, and semaphores inside your code). Code that you are writing for data processing can be scaled almost infinitely. This is a strong argument for all those people who are saying that functional programming brings overhead in your code (because function calls can be expensive e.t.c). A few simple concepts: pure functions, referential transparency, immutable data structures made it possible to create the technology that can sort 100 TB array in 20 minutes and you don&#x2019;t need to setup supercomputers (mainframes) for that task you just need to write code that can be scaled.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In general, I found this course interesting, challenging. Definitely, I don&#x2019;t regret that I have passed it and going to take the next one in this series. Big thanks to all those people who created this course and <a href="https://databricks.com/">databricks.com</a> project.</p>
 <div id="footer">
 </div>
 <div id="disqus_thread"></div>
@@ -110,5 +109,3 @@
         </script>
     </body>
 </html>
-
-
